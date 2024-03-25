@@ -1,0 +1,31 @@
+name: build
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download Eigen
+        run: |
+          git clone https://gitlab.com/libeigen/eigen.git
+      - name: Install Eigen
+        run: |
+          cmake -Bbuild -S. `
+            -A Win32 `
+            -D CMAKE_INSTALL_PREFIX="$(pwd)/../install-eigen" `
+            -D CMAKE_Fortran_COMPILER="NOTFOUND" `
+            -D BUILD_TESTING=Off
+          cmake --build build --config Release
+          cmake --install build --config Release
+        working-directory: eigen
+        shell: pwsh
+      - name: Build example project
+        run: |
+          cmake -Bbuild -S. `
+            -A Win32 `
+            -D Eigen3_DIR="$(pwd)/install-eigen"
+          cmake --build build --config Release
+        shell: pwsh
