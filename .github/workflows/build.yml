@@ -20,9 +20,9 @@ jobs:
       - name: Download Eigen
         run: |
           git clone https://gitlab.com/libeigen/eigen.git
-          git checkout ${{ matrix.commit }}
       - name: Install Eigen
         run: |
+          git checkout ${{ matrix.commit }}
           cmake -Bbuild -S. `
             -A Win32 `
             -D CMAKE_INSTALL_PREFIX="$(pwd)/../install-eigen" `
