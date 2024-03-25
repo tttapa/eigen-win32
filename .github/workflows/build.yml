@@ -26,6 +26,6 @@ jobs:
         run: |
           cmake -Bbuild -S. `
             -A Win32 `
-            -D Eigen3_DIR="$(pwd)/install-eigen"
+            -D Eigen3_DIR="$(pwd)/install-eigen/share/eigen3/cmake"
           cmake --build build --config Release
         shell: pwsh
