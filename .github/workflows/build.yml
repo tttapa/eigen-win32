@@ -14,6 +14,7 @@ jobs:
           - d883932586a1f1f14f3ab3aa7f2f7e2475264e19
           - b86641a4c20fc9709bba0d9056821689a4c6d081
           - master
+      fail-fast: false
     steps:
       - uses: actions/checkout@v3
       - name: Download Eigen
