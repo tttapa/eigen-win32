@@ -13,6 +13,7 @@ jobs:
           - 126ba1a166090dd5605995921d964c6a6e9e0a88
           - d883932586a1f1f14f3ab3aa7f2f7e2475264e19
           - b86641a4c20fc9709bba0d9056821689a4c6d081
+          - d8aa4d6ba56f699a8ca6a7e1c6b89e189d81c3a4
           - master
       fail-fast: false
     steps:
