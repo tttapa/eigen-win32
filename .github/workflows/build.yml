@@ -23,7 +23,8 @@ jobs:
           git checkout ${{ matrix.commit }}
           cmake -Bbuild -S. \
             -D CMAKE_INSTALL_PREFIX="$PWD/../install-eigen" \
-            -D BUILD_TESTING=Off
+            -D BUILD_TESTING=Off \
+            -D CMAKE_Fortran_COMPILER=NOTFOUND
           cmake --build build
           cmake --install build
         working-directory: eigen
