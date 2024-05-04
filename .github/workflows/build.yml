@@ -24,7 +24,7 @@ jobs:
           cmake -Bbuild -S. \
             -D CMAKE_INSTALL_PREFIX="$PWD/../install-eigen" \
             -D BUILD_TESTING=Off \
-            -D CMAKE_Fortran_COMPILER=NOTFOUND
+            -D CMAKE_Fortran_COMPILER=""
           cmake --build build
           cmake --install build
         working-directory: eigen
