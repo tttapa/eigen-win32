@@ -5,15 +5,12 @@ on:
 
 jobs:
   build:
-    runs-on: windows-2022
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         commit:
-          - 1d4369c2ff3c8df0528fc5ac972a1a76e2adcfc9
-          - 126ba1a166090dd5605995921d964c6a6e9e0a88
-          - d883932586a1f1f14f3ab3aa7f2f7e2475264e19
-          - b86641a4c20fc9709bba0d9056821689a4c6d081
-          - d8aa4d6ba56f699a8ca6a7e1c6b89e189d81c3a4
+          - c1d637433e3b3f9012b226c2c9125c494b470ae6
+          - 9700fc847a39e98dfb7bd85331b5206641050e04
           - master
       fail-fast: false
     steps:
@@ -24,19 +21,14 @@ jobs:
       - name: Install Eigen
         run: |
           git checkout ${{ matrix.commit }}
-          cmake -Bbuild -S. `
-            -A Win32 `
-            -D CMAKE_INSTALL_PREFIX="$(pwd)/../install-eigen" `
-            -D CMAKE_Fortran_COMPILER="NOTFOUND" `
+          cmake -Bbuild -S. \
+            -D CMAKE_INSTALL_PREFIX="$PWD/../install-eigen" \
             -D BUILD_TESTING=Off
-          cmake --build build --config Release
-          cmake --install build --config Release
+          cmake --build build
+          cmake --install build
         working-directory: eigen
-        shell: pwsh
       - name: Build example project
         run: |
-          cmake -Bbuild -S. `
-            -A Win32 `
-            -D Eigen3_DIR="$(pwd)/install-eigen/share/eigen3/cmake"
-          cmake --build build --config Release
-        shell: pwsh
+          cmake -Bbuild -S. \
+            -D Eigen3_DIR="$PWD/install-eigen/share/eigen3/cmake"
+          cmake --build build
